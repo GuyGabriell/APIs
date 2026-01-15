@@ -2,12 +2,13 @@
 import { ref } from "vue";
 
 const query = ref("");
+const limit = ref("");
 const gifs = ref([]);
 const fetchGifs = async () => {
   const response = await fetch(
     `https://api.giphy.com/v1/gifs/search?api_key=${
       import.meta.env.VITE_GIPHY_API_KEY
-    }&q=${query.value}&limit=10&rating=g`,
+    }&q=${query.value}&limit=${limit.value}&rating=g`,
     {
       method: "GET",
       headers: {
@@ -16,8 +17,9 @@ const fetchGifs = async () => {
     }
   );
   const data = await response.json();
-  gifs.value = data.data; 
-
+  gifs.value = data.data;
+  query.value = "";
+  limit.value = "";
 };
 
 // fetchGifs();
@@ -40,10 +42,18 @@ const fetchGifs = async () => {
         placeholder="Search for a GIF..."
         class="outline-none"
       />
+      <input
+        v-model="limit"
+        type="number"
+        min="1"
+        max="50"
+        title="Limit"
+        class="outline-none border-l border-gray-300 px-2 py-2 w-14 text-center"
+      />
       <!-- search-button-->
       <button
         type="submit"
-        class="border rounded-md px-4 py-2 bg-blue-400 text-white"
+        class="border rounded-md px-4 py-2 bg-blue-400 text-white font-semibold"
       >
         Search
       </button>
@@ -65,7 +75,7 @@ const fetchGifs = async () => {
 
         <!-- Creator Name -->
         <p class="text-sm text-gray-500 italic">
-        {{ gif.user?.display_name || gif.username || "Anonymous" }}
+          {{ gif.user?.display_name || gif.username || "Anonymous" }}
         </p>
       </div>
     </div>
