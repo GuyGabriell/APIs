@@ -26,24 +26,25 @@ const fetchGifs = async () => {
 </script>
 
 <template>
-  <div class="flex flex-col items-center h-screen">
+  <!-- h-screen to min-h-screen place content on mobile -->
+  <div class="flex flex-col items-center min-h-screen px-4">
     <!-- header -->
-    <h1 class="text-3xl font-bold text-blue-300 text-center mt-10 mb-5">
+    <h1 class="text-2xl md:text-3xl font-bold text-blue-300 text-center mt-10 mb-5">
       GIPHY MAKES SEARCH EASY...
     </h1>
-    <!-- form/search-bar -->
+
+    <!-- form -->
     <form
       @submit.prevent="fetchGifs"
-      class="flex flex-row items-center gap-2 mb-10"
+      class="flex flex-col md:flex-row items-center gap-2 mb-10 w-full md:w-auto"
     >
-      <!-- search-input -->
+      <!-- query-input -->
       <input
         v-model="query"
         type="text"
         placeholder="Search for a GIF..."
-        class="border border-gray-300 rounded-md px-4 py-2 w-64 outline-none focus:border-blue-400"
+        class="border border-gray-300 rounded-md px-4 py-2 w-full md:w-64 outline-none focus:border-blue-400"
       />
-
       <!-- limit-input -->
       <input
         v-model="limit"
@@ -51,25 +52,26 @@ const fetchGifs = async () => {
         min="1"
         max="50"
         placeholder="Search from (1-50)"
-        class="border border-gray-300 rounded-md px-4 py-2 w-64 outline-none focus:border-blue-400"
+        class="border border-gray-300 rounded-md px-4 py-2 w-full md:w-64 outline-none focus:border-blue-400"
       />
 
       <!-- search-button -->
       <button
         type="submit"
-        class="rounded-md px-6 py-2 bg-blue-400 text-white font-semibold"
+        class="w-full md:w-auto rounded-md px-6 py-2 bg-blue-400 text-white font-semibold"
       >
         Search
       </button>
     </form>
+
     <!-- gifs-images -->
-    <div class="flex flex-wrap gap-6 items-center justify-center px-50">
-      <div v-for="gif in gifs" :key="gif.id">
+    <div class="flex flex-wrap gap-6 items-center justify-center md:px-50 pb-10">
+      <div v-for="gif in gifs" :key="gif.id" class="flex flex-col items-center">
         <!-- image -->
         <img
           :src="gif.images.original.url"
           :alt="gif.title"
-          class="w-40 h-40 object-cover rounded-lg"
+          class="w-50 md:w-40 h-50 md:h-40 object-cover rounded-lg"
         />
 
         <!-- gifs-title -->
