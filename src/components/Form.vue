@@ -27,7 +27,7 @@ const fetchGifs = async () => {
 
 <template>
   <!-- h-screen to min-h-screen place content on mobile -->
-  <div class="flex flex-col items-center min-h-screen px-4">
+  <div class="flex flex-col items-center min-h-screen px-6">
     <!-- header -->
     <h1 class="text-2xl md:text-3xl font-bold text-blue-300 text-center mt-10 mb-5">
       GIPHY MAKES SEARCH EASY...
@@ -65,13 +65,13 @@ const fetchGifs = async () => {
     </form>
 
     <!-- gifs-images -->
-    <div class="flex flex-wrap gap-6 items-center justify-center md:px-50 pb-10">
-      <div v-for="gif in gifs" :key="gif.id" class="flex flex-col items-center">
+    <div class="flex flex-wrap gap-6 items-center justify-center md:px-46 pb-10">
+      <div v-for="gif in gifs" :key="gif.id" class="flex flex-col w-full md:w-40">
         <!-- image -->
         <img
           :src="gif.images.original.url"
           :alt="gif.title"
-          class="w-50 md:w-40 h-50 md:h-40 object-cover rounded-lg"
+          class="w-full h-46 md:w-40 md:h-40 object-cover rounded-lg"
         />
 
         <!-- gifs-title -->
